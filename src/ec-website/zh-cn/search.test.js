@@ -63,7 +63,7 @@ describe("中文搜索结果页测试", () => {
     await page.waitForSelector(
       "#search-container > div.tags-wrapper > div > span.keywords.font-clr-black.float_left"
     );
-    
+
     //是否存在搜索结果（第一个商品）
     const existsSearchResult = await page.$eval(
       "#search-container > div.search-content.container-responsive.clearfix > div > div.col-2 > div > div.content.clearfix > div:nth-child(2) > div > div.item-add_desc > p > a",
@@ -76,6 +76,40 @@ describe("中文搜索结果页测试", () => {
     expect(itemName.indexOf("饼干")).toBeGreaterThan(-1);
     expect(existsSearchResult).toBe(true);
   });
+
+  test("检查商品加入购物车功能", async () => {
+    // 等待页面加载完成
+    
+    await page.waitForSelector(
+      "#search-container > div.tags-wrapper > div > span.keywords.font-clr-black.float_left"
+    );
+    //是否存在搜索结果（第一个商品加购按钮）
+    const existsSearchResultItemBtn = await page.$eval(
+      "#search-container > div.search-content.container-responsive.clearfix > div > div.col-2 > div > div.content.clearfix > div:nth-child(2) > div > div.item-action > div > div.js-add-desc",
+      (el) => (el ? true : false)
+    );
+    expect(existsSearchResultItemBtn).toBe(true);
+
+    let miniCartProductQuantity = await page.$eval(
+      "#header-cart > a > i > div",
+      (el) => el.innerText
+    );
+    console.log('miniCartProductQuantity===>',miniCartProductQuantity,'|')
+    expect(miniCartProductQuantity).toBe('');
+
+
+    await page.click('#search-container > div.search-content.container-responsive.clearfix > div > div.col-2 > div > div.content.clearfix > div:nth-child(2) > div > div.item-action > div > div.js-add-desc');
+    
+    await  page.waitForTimeout(1000)
+    miniCartProductQuantity = await page.$eval(
+      "#header-cart > a > i > div",
+      (el) => el.innerText
+    );
+    
+    console.log('miniCartProductQuantity222===>',miniCartProductQuantity,'|')
+    expect(miniCartProductQuantity).toBe('1');
+
+  }, 99000);
 
   test("检查顶部搜索功能", async () => {
     // 输入zipcode
@@ -103,4 +137,6 @@ describe("中文搜索结果页测试", () => {
     expect(itemName.indexOf("饼干")).toBeGreaterThan(-1);
     expect(existsSearchResult).toBe(true);
   });
+
+  
 });
