@@ -68,5 +68,5 @@ describe("中文首页测试", () => {
     ); 
     expect(itemName.indexOf('饼干')).toBeGreaterThan(-1);
     expect(existsSearchResult).toBe(true);
-  });
+  },99999);
 });
