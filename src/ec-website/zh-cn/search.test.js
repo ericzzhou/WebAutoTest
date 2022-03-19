@@ -136,7 +136,7 @@ describe("中文搜索结果页测试", () => {
     );
     expect(itemName.indexOf("饼干")).toBeGreaterThan(-1);
     expect(existsSearchResult).toBe(true);
-  });
+  },9999999);
 
   
 });
