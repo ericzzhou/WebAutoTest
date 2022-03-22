@@ -11,9 +11,9 @@ describe("生鲜首页测试", () => {
   beforeAll(async () => {
     browser = await puppeteer.launch(globalConfiguraiton.launchOptions);
     page = await browser.newPage();
-    await page.setViewport(globalConfiguraiton.viewportOptions);
+    // await page.setViewport(globalConfiguraiton.viewportOptions);
     response = await page.goto(`${globalConfiguraiton.host}${url}`, {
-      timeout: 0,
+      // timeout: 0,
       waitUntil: "domcontentloaded",
     });
     await page.waitForSelector("#container");

@@ -13,9 +13,9 @@ describe("中文商品详情页测试", () => {
     page = await browser.newPage();
     // const blockTypes = new Set(['image', 'media', 'font']);
     // await page.setRequestInterception(true); //开启请求拦截
-    await page.setViewport(globalConfiguraiton.viewportOptions);
+    // await page.setViewport(globalConfiguraiton.viewportOptions);
     response = await page.goto(`${globalConfiguraiton.host}${url}`, {
-      timeout: 0,
+      // timeout: 0,
       waitUntil: "domcontentloaded",
     });
     await page.waitForSelector("#header");
